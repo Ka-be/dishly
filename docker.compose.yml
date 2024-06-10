@@ -3,7 +3,7 @@ networks:
     driver: bridge
 
 services:
-  apollo-server:
+  backend:
     build:
       context: .
       dockerfile: docker-configuration/apollo-server/Dockerfile
@@ -17,7 +17,7 @@ services:
     networks:
       - dishly-network
     depends_on:
-      - postgresql
+      - database
     env_file:
       - ./.env
 
@@ -33,6 +33,8 @@ services:
     networks:
       - dishly-network
 
+  middleware:
+
   frontend:
     build:
       context: .
@@ -46,7 +48,7 @@ services:
     networks:
       - dishly-network
     depends_on:
-      - apollo-server
+      - backend
 
   volumes:
     postgresql-data:

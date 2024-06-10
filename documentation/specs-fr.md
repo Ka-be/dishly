@@ -1,44 +1,50 @@
-# Dishly - Specifications
+# Dishly - Specifications - FR 🇫🇷
 
-## What is Dishly?
-
+## Qu'est-ce que Dishly ?
 Dishly est une application de cuisine permettant de créer, visualiser et suivre les étapes de manière simple et intuitive de ses propres recettes.
-Pour chaque recette de cuisine, l'application sera divisée en 2 onglets : un onglet ingrédients et un onglet étapes.
+Pour chaque recette de cuisine, l'application sera divisée en 2 onglets : un onglet ingrédients et un onglet étapes, qui pourront être suivies pas à pas.
 
-## What is the purpose of this project?
-L'objectif de ce projet est de développer un prototype fonctionnel (Utilisable sur téléphone mobile ou tablette si possible) de Dishly, selon les spécifications ci-après.
+## Quel est l'objectif du projet ?
+L'objectif de ce projet est de développer un prototype fonctionnel *(Utilisable sur téléphone mobile ou tablette si possible)* de Dishly, selon les spécifications ci-après.
 
 
-## Specifications - Phase 1: GraphQL API
+## Specifications - Phase 1 : Backend
 
-### Technical specifications
+### Spécifications techniques
 
-Première phase : Développement du backend avec API GraphQL + TS + PostgreSQL + Docker.
-Data générée aléatoirement si possible
-Data stockée en DB accessible via l'API GraphQL
-Si possible ajout du cache.
+Développement du backend avec les technologies suivantes :
+* **Language** : TypeScript
+* **Serveur** : Apollo
+* **API** : GraphQL
+* **Base de données** : PostgreSQL
+* **ORM** : Prisma
 
-### Functional specifications
+La structure sera conteneurisée sous Docker.
+Dans un premier temps, la dat sera générée aléatoirement pour le développement.
+Si possible, ajout du cache.
+
+
+### Spécifications fonctionnelles
  
-1 - Création du backend sans authentification et authorisation, avec un single role user (admin)
-2 - Création du middleware pour y intégrer l'authentification et authorisation avec les roles admin et user.
+1. Création dans un premier temps du backend **sans authentification et authorisation**, avec un single role user (admin)
+2. Dans un deuxième temps, ajout d'un **middleware** conteneurisé pour y intégrer l'authentification et authorisation avec les roles *admin* et *user*.
 
-Entités :
-User
-Un utilisateur a un lastname, un firstname, une adresse mail, un mot de passe, une photo de profil et un role
-Recipe
+#### Entités
+* **User** : Un utilisateur a un lastname, un firstname, une adresse mail, un mot de passe, une photo de profil et un role
+* **Recipe**
 Une recette a un titre, une image, un temps de préparation, un temps de cuisson, une difficulté, un nombre de convives, des ingrédients, des tags, un owner et des étapes.
-Ingredient
+* **Ingredient**
 Un ingrédient a un nom, une quantité et une unité
-Tag
+* **Tag**
 Un tag a un nom
-Step
+* **Step**
 Une érape a une description et une image
-Unit
+* **Unit**
 Une unité a un nom
 
 
-#### Simplified user stories
+
+#### User Stories
 En tant qu'admin, je peux voir toutes les recettes, je peux modifier une recette, je peux supprimer une recette, je peux créer une recette, Je peux CRUD tags, je peux créer un utilisateur, je peux modifier un user, supprimer un user
 
 En tant qu'user, je peux creer des recettes, modifiers mes recettes, supprimer mes recettes, je peux voir mes recettes
@@ -83,7 +89,17 @@ En tant qu'user, je peux creer des recettes, modifiers mes recettes, supprimer m
 
 <!-- Suite a écrire -->
 
-## Specifications - Phase 2: Mobile application
+## Specifications - Phase 2 : Frontend
+
+### Spécifications techniques
+* **Language** : TypeScript
+* **Framework / Librairie** : Expo + React Native
+* **UI** : SASS ou Tailwind (à déterminer)
+
+La structure sera également conteneurisée sous Docker.
+
+
+### Spécifications fonctionnelles
 
 <!-- The specifications of the second phase will be defined later. -->
 
