@@ -1,0 +1,52 @@
+networks:
+  dishly-network:
+    driver: bridge
+
+services:
+  apollo-server:
+    build:
+      context: .
+      dockerfile: docker-configuration/apollo-server/Dockerfile
+    restart: on-failure
+    volumes:
+      - ./apollo-server:/app/apollo-server
+      - /app/apollo-server/node_modules
+    ports:
+      - "4005:4005"
+      - "5555:5555" # Port used by Prisma Studio
+    networks:
+      - dishly-network
+    depends_on:
+      - postgresql
+    env_file:
+      - ./.env
+
+  database:
+    image: Postgres
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    networks:
+      - dishly-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker-configuration/react-native-client/Dockerfile
+    restart: on-failure
+    volumes:
+      - ./react-native-client:/app/react-native-client
+      - /app/react-native-client/node_modules
+    ports:
+      - "8081:8081"
+    networks:
+      - dishly-network
+    depends_on:
+      - apollo-server
+
+  volumes:
+    postgresql-data:

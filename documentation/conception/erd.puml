@@ -1,0 +1,71 @@
+@startuml erd
+' skinparam linetype ortho
+
+entity "User" {
+    id
+  --
+    lastname : string
+    firstname : string
+    email : string
+    password : string
+    image : string
+    role_id : <<FK>> number
+}
+
+entity "Role" {
+    id
+  --
+    type: string
+}
+
+entity "Recipe" {
+    id
+  --
+    title : string
+    image : string
+    prep_time : number
+    cook_time : number
+    difficulty : number
+    servings : number
+    ingredients : <<FK>> number
+    tags : <<FK>> number
+    user_id : <<FK>> number
+    steps : <<FK>> number
+}
+
+entity "Ingredient" {
+    id
+  --
+    name : string
+    amount : number
+    unit : <<FK>> number
+}
+
+entity "Unit" {
+    id
+  --
+    name : string
+}
+
+entity "Tag" {
+    id
+  --
+    name : string
+}
+
+entity "Step" {
+    id
+  --
+    description : string
+    image : string
+}
+
+User ||--o{ Role
+User }o--|| Recipe
+Recipe ||--|{ Ingredient
+Recipe ||--|{ Tag
+Recipe ||--|{ Step
+Ingredient ||--o{ Unit
+
+
+@enduml
