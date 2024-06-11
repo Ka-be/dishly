@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+
+actor Utilisateur as user
+actor Admin as admin
+
+rectangle "Dishly" {
+
+usecase "S'inscrire" as UC1
+usecase "Se connecter" as UC2
+usecase "Modifier un utilisateur" as UC3
+usecase "Supprimer un utilisateur" as UC4
+usecase "Modifier ses informations" as UC5
+usecase "Voir ses recettes" as UC6
+usecase "Voir toutes les recettes" as UC7
+usecase "Créer une recette" as UC8
+usecase "Modifier une recette" as UC9
+usecase "Supprimer une recette" as UC10
+
+admin ..> user
+user -> UC1
+UC1 -> UC2
+user -> UC2
+
+admin -> UC3
+admin -> UC4
+admin -> UC7
+
+user --> UC5
+user --> UC6
+user --> UC8
+user --> UC9
+user --> UC10
+
+}
+
+
+@enduml

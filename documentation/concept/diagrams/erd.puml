@@ -1,4 +1,4 @@
-@startuml erd
+@startuml
 ' skinparam linetype ortho
 
 entity "User" {
@@ -8,7 +8,6 @@ entity "User" {
     firstname : string
     email : string
     password : string
-    image : string
     role_id : <<FK>> number
 }
 
@@ -23,12 +22,10 @@ entity "Recipe" {
   --
     title : string
     image : string
-    prep_time : number
-    cook_time : number
-    difficulty : number
     servings : number
     ingredients : <<FK>> number
     tags : <<FK>> number
+    categories: <<FK>> number
     user_id : <<FK>> number
     steps : <<FK>> number
 }
@@ -37,8 +34,14 @@ entity "Ingredient" {
     id
   --
     name : string
+}
+
+entity "RecipeIngredient" {
+    id
+  --
     amount : number
-    unit : <<FK>> number
+ingredient_id : <FK>> number
+unit : <<FK>> number
 }
 
 entity "Unit" {
@@ -53,6 +56,12 @@ entity "Tag" {
     name : string
 }
 
+entity "Category" {
+    id
+  --
+    name : string
+}
+
 entity "Step" {
     id
   --
@@ -60,12 +69,14 @@ entity "Step" {
     image : string
 }
 
-User ||--o{ Role
-User }o--|| Recipe
-Recipe ||--|{ Ingredient
-Recipe ||--|{ Tag
+User }|--|| Role
+User ||--o{ Recipe
+Recipe ||--|{ RecipeIngredient
+Recipe }o--o{ Tag
+Recipe }o--|{ Category
 Recipe ||--|{ Step
-Ingredient ||--o{ Unit
+RecipeIngredient }o--|| Ingredient
+RecipeIngredient }o--|| Unit
 
 
 @enduml
