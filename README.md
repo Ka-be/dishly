@@ -16,13 +16,13 @@ _This application is created as part of my professional project for obtaining my
 
 
 ## 🛠 Tech Stack
+**Language:**
+![Typescript](https://img.shields.io/badge/TypeScript-007ACC?&logo=typescript&logoColor=white)
 
 **Client:**
 ![Expo](https://img.shields.io/badge/Expo-1B1F23?&logo=expo&logoColor=white)
 ![React Native](https://img.shields.io/badge/React_Native-20232A?&logo=react&logoColor=61DAFB)  
 
-    
-    
 **Server:**
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?&logo=postgresql&logoColor=white)
 ![Apollo GraphQL](https://img.shields.io/badge/Apollo%20GraphQL-311C87?&&logo=Apollo%20GraphQL&logoColor=white)
