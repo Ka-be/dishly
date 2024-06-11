@@ -1,0 +1,7 @@
+# The "Query" type is special: it lists all of the available queries that clients can execute, along with the return type of each. 
+# In this case, the "people" query return an array of zero or more Person (defined above).
+type Query {
+    hello: String
+    people: [Person]
+    person(id: Int!): Person
+}

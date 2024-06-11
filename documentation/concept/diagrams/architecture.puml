@@ -3,7 +3,14 @@
 
 node "Frontend" {
     component Client [
-        App React
+        App Expo + React-Native
+        node:20-alpine
+    ]
+}
+
+node "Middleware" {
+    component Auth[
+        App Expo + React-Native
         node:20-alpine
     ]
 }
@@ -17,10 +24,7 @@ node "Backend" {
         User_service
         node:20-alpine
     ]
-    component Auth [
-        Auth_service
-        node:20-alpine
-    ]
+
     component Resa [
         Reservation_service
         node:20-alpine
