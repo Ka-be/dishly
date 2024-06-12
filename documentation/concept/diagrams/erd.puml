@@ -23,6 +23,7 @@ entity "Recipe" {
     title : string
     image : string
     servings : number
+    is_public : boolean
     ingredients : <<FK>> number
     tags : <<FK>> number
     categories: <<FK>> number

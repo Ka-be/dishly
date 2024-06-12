@@ -36,7 +36,7 @@ Un utilisateur possède un lastname, un firstname, une adresse mail, un mot de p
 * **Role** : 
 Un role possède un nom (user ou admin)
 * **Recipe** : 
-Une recette possède un titre, une image, un nombre de convives, des ingrédients, des tags, des types, un owner et des étapes.
+Une recette possède un titre, une image, un nombre de convives, des ingrédients, des tags, des types, un owner des étapes et peut être publique (par défaut) ou privée.
 * **RecipeIngredient** : 
 Un ingrédient de recette possède un ingrédient, une quantité et une unité
 * **Ingredient** : 
@@ -54,16 +54,18 @@ Une unité possède un nom
 
 #### User Stories
 En tant qu'**admin**, je peux : 
-- Voir toutes les recettes
+- Voir toutes les recettes (privées ou publiques)
+- Voir mes recettes
 - Créer une recette
 - Modifier / Supprimer toutes les recettes
 - Modifier / Supprimer un utilisateur
 
 En tant qu'**user**, je peux :
+- Voir toutes les recettes publiques
 - Voir mes recettes
 - Créer une recette
 - Modifier / Supprimer mes recettes
-- Modifier mon compte utilisateur
+- Modifier mes informations d'utilisateur
 
 
 <!-- Ajout de visualisation selon filtres TODO -->
@@ -101,7 +103,7 @@ Envoi des étapes sur montre connectée, partage entre amis de recette, récupé
 ### UMLs
 #### UseCases
 
-![Usecases](./concept/diagrams/usecases.png)
+<!--  TODO  -->
 
 #### Diagramme relations - entités
 
