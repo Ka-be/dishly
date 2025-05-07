@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
-      "target": "ES2020",                        // Support moderne
-      "module": "ES2022",                        // Pour utiliser les imports ESModules
-      "moduleResolution": "node",
-      "lib": ["ES2020"],
-      "strict": true,
-      "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true,
-      "skipLibCheck": true,
-      "outDir": "dist",                          // Output compilé
-      "rootDir": "src",                          // Dossier source
-      "resolveJsonModule": true
-    },
-    "include": ["src"],                          // Inclus les fichiers TypeScript
-    "exclude": ["node_modules", "dist"]
-  }
-  
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

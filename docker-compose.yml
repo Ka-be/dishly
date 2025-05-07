@@ -15,13 +15,14 @@ services:
 
   api:
     build: ./api
-    restart: unless-stopped
+    restart: on-failure
     environment:
       DATABASE_URL: postgres://dishly:dishlypass@db:5432/dishly
     depends_on:
       - db
     ports:
       - "4000:4000"
+      - "5555:5555"
     volumes:
       - ./api:/app
       - /app/node_modules
@@ -29,9 +30,19 @@ services:
     networks:
       - dishly-network
 
+  adminer:
+    image: adminer
+    container_name: dishly-adminer
+    expose:
+      - "8080"
+    depends_on:
+      - db
+    networks:
+      - dishly-network
+
   frontend:
     build: ./frontend
-    restart: unless-stopped
+    restart: on-failure
     depends_on:
       - api
     ports:
