@@ -1,7 +1,0 @@
-# This "Person" type defines the queryable fields for every person in our data source.
-type User {
-    id: Int!
-    name: String!
-    age: Int!
-    partner: Person
-}
