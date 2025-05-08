@@ -77,10 +77,12 @@ export const Navbar = ({ user = { name: "Kevin", email: "kaabe@gmail.com" } }: N
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem>
-                                        <User className="mr-2 h-4 w-4" />
-                                        <span>Profil</span>
-                                    </DropdownMenuItem>
+                                    <Link href="/profile">
+                                        <DropdownMenuItem>
+                                            <User className="mr-2 h-4 w-4" />
+                                            <span>Profil</span>
+                                        </DropdownMenuItem>
+                                    </Link>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem onClick={handleLogout}>
