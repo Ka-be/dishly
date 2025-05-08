@@ -117,7 +117,7 @@ export function RecipeSearch() {
         (activeFilters.maxTime < 120 ? 1 : 0)
 
     return (
-        <div className="w-full max-w-6xl mx-auto">
+        <div className="w-full max-w-6xl mx-auto px-6">
             <div className="relative">
                 <div className="flex items-center border rounded-sm shadow-sm overflow-hidden bg-white">
                     <div className="flex-1 flex items-center pl-4">
@@ -142,18 +142,6 @@ export function RecipeSearch() {
                                 {totalActiveFilters}
                             </span>
                         )}
-                    </Button>
-                    <Button
-                        className="
-                            rounded-l-none rounded-r-sm px-6 h-12
-                            bg-gradient-to-br from-primary to-yellow-500/80 text-white
-                            shadow-lg
-                            transition-all duration-700
-                            bg-[length:200%_200%] bg-[position:0%_0%]
-                            hover:bg-[position:100%_100%]
-                        "
-                    >
-                        Rechercher
                     </Button>
                 </div>
             </div>
