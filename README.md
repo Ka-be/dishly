@@ -3,7 +3,7 @@
 <!-- 
 ![Status](https://img.shields.io/badge/Status-Finished-20bf6b?style=flat-square) -->
 
-<img src="./documentation/assets/Dishly_hero.png" width=50%>
+<img src="./frontend/public/banner.webp" width=50%>
 
 A mobile application that will allow you to create your own cooking recipes and easily recreate them, step by step.
 

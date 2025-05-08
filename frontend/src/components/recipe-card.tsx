@@ -11,7 +11,10 @@ interface RecipeCardProps {
 
 export function RecipeCard({ recipe }: RecipeCardProps) {
     return (
-        <Card className="overflow-hidden group">
+        <Card className="
+        overflow-hidden group px-2
+        hover:cursor-pointer hover:shadow-lg
+        transition-all duration-300">
             <div className="relative aspect-video overflow-hidden">
                 <Image
                     src={recipe.image}
@@ -51,11 +54,11 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
                     </div>
                 </div>
             </CardContent>
-            <CardFooter className="p-4 pt-0">
-                <Button variant="secondary" className="w-full">
-                    Voir la recette
+            {/* <CardFooter className="p-4 pt-0">
+                <Button variant="default" className="w-full">
+                    Modifier la recette
                 </Button>
-            </CardFooter>
+            </CardFooter> */}
         </Card>
     )
 }
