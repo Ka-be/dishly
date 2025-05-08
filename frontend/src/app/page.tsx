@@ -1,6 +1,6 @@
 
 import { RecipeSearch } from "@/components/recipe-search"
-import Navbar from "@/components/Navbar"
+import { Navbar } from "@/components/Navbar"
 
 export default function HomePage() {
     return (

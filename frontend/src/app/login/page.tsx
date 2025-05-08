@@ -1,6 +1,6 @@
-import Navbar from "@/components/Navbar"
+import { Navbar } from "@/components/Navbar"
 
-export default function ConnexionPage() {
+export default function LoginPage() {
     return (
         <div className="flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-outfit)]">
             <Navbar />
