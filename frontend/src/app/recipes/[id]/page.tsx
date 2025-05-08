@@ -9,7 +9,6 @@ interface RecipeDetailPageProps {
 }
 
 export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
-    // Ici, tu récupères la recette selon l'id
     const recipe = recipes.find(r => r.id === Number(params.id))
 
     if (!recipe) return notFound()

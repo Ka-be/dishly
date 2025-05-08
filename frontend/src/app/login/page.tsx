@@ -6,7 +6,7 @@ export default function LoginPage() {
             <Navbar />
 
             <main className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto">
-            <h2 className="text-2xl font-bold">Connexion</h2>
+                <h2 className="text-2xl font-bold">Connexion</h2>
             </main>
         </div>
     );
