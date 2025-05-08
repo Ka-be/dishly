@@ -9,7 +9,7 @@ import { RecipeCard } from "@/components/recipe-card"
 import { RecipeFilters } from "@/components/recipe-filters"
 import { recipes } from "@/data/recipes"
 import { Checkbox } from "@/components/ui/checkbox"
-
+import Link from "next/link"
 type Filters = {
     mealType: string[]
     cuisineType: string[]
@@ -222,7 +222,9 @@ export function RecipeSearch() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredRecipes.map((recipe) => (
-                        <RecipeCard key={recipe.id} recipe={recipe} />
+                        <Link key={recipe.id} href={`/recipes/${recipe.id}`}>
+                            <RecipeCard recipe={recipe} />
+                        </Link>
                     ))}
                 </div>
 
