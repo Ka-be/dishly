@@ -14,7 +14,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         <Card className="overflow-hidden group">
             <div className="relative aspect-video overflow-hidden">
                 <Image
-                    src={recipe.image || "/placeholder.svg"}
+                    src={recipe.image}
                     alt={recipe.name}
                     fill
                     className="object-cover transition-transform group-hover:scale-105"

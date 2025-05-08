@@ -127,7 +127,7 @@ export function RecipeSearch() {
                             placeholder="Rechercher une recette..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="flex-1 border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                            className="flex-1 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
                         />
                     </div>
                     <Button
@@ -143,7 +143,18 @@ export function RecipeSearch() {
                             </span>
                         )}
                     </Button>
-                    <Button className="rounded-l-none rounded-r-sm px-6 h-12">Rechercher</Button>
+                    <Button
+                        className="
+                            rounded-l-none rounded-r-sm px-6 h-12
+                            bg-gradient-to-br from-primary to-yellow-500/80 text-white
+                            shadow-lg
+                            transition-all duration-700
+                            bg-[length:200%_200%] bg-[position:0%_0%]
+                            hover:bg-[position:100%_100%]
+                        "
+                    >
+                        Rechercher
+                    </Button>
                 </div>
             </div>
 
