@@ -122,7 +122,7 @@ export function RecipeSearch() {
     return (
         <div className="w-full max-w-6xl mx-auto px-6">
             <div className="relative">
-                <div className="flex items-center border rounded-sm shadow-xs overflow-hidden bg-white">
+                <div className="flex items-center border rounded-sm shadow-xs overflow-hidden bg-background">
                     <div className="flex-1 flex items-center pl-4">
                         <Search className="h-5 w-5 text-gray-400 mr-2" />
                         <Input

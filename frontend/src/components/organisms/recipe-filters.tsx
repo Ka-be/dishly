@@ -28,7 +28,7 @@ export function RecipeFilters({ activeFilters, setActiveFilters, toggleFilter, c
     const difficultyLevels = ["Facile", "Moyen", "Difficile"]
 
     return (
-        <div className="mt-2 p-6 bg-white border rounded-sm shadow-md">
+        <div className="mt-2 p-6 bg-background border rounded-sm shadow-md">
             <div className="flex justify-between items-center mb-4">
                 <h3 className="font-semibold text-lg">Filtres</h3>
                 <Button variant="ghost" size="sm" onClick={clearFilters}>

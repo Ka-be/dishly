@@ -33,8 +33,8 @@ export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
                 <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold text-lg line-clamp-1">{recipe.name}</h3>
                 </div>
-                <p className="text-sm text-gray-500 line-clamp-2 mb-3">{recipe.description}</p>
-                <div className="flex flex-wrap gap-3 text-sm text-gray-500">
+                <p className="text-sm text-foreground/60 line-clamp-2 mb-3">{recipe.description}</p>
+                <div className="flex flex-wrap gap-3 text-sm text-foreground/50">
                     <div className="flex items-center gap-1">
                         <Clock className="h-4 w-4" />
                         <span>{recipe.cookingTime} min</span>
@@ -42,10 +42,6 @@ export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
                     <div className="flex items-center gap-1">
                         <ChefHat className="h-4 w-4" />
                         <span>{recipe.difficulty}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <Users className="h-4 w-4" />
-                        <span>{recipe.servings} pers.</span>
                     </div>
                 </div>
             </CardContent>
