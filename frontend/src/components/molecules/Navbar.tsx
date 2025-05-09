@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { LogOut, Menu, User } from "lucide-react"
+import Logo from "@/components/molecules/Logo"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -16,7 +17,9 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import Image from "next/image"
+
+
+
 
 interface NavbarProps {
     user?: {
@@ -40,7 +43,11 @@ export const Navbar = ({ user = { name: "Kevin", email: "kaabe@gmail.com" } }: N
             <div className=" flex h-16 items-center justify-between w-full ">
                 <div className="flex items-center gap-2 md:gap-4">
                     <Link href="/" className="flex items-center space-x-2">
-                        <Image src="/logo_full.webp" alt="Logo" width={100} height={100} />
+                        <Logo
+                            primary="var(--primary)"
+                            secondary="var(--secondary)"
+                            background="var(--background)"
+                        />
                     </Link>
                 </div>
 
@@ -100,7 +107,7 @@ export const Navbar = ({ user = { name: "Kevin", email: "kaabe@gmail.com" } }: N
                                 <Link href="/login">Se connecter</Link>
                             </Button>
                         </div>
-                        
+
                     )}
 
                     {/* Mobile Menu
