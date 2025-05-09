@@ -68,7 +68,7 @@ export const Navbar = ({ user = { name: "Kevin", email: "kaabe@gmail.com" } }: N
                     {user ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                                <Button variant="ghost" className="relative h-8 w-8 rounded-xs">
                                     <Avatar className="h-8 w-8">
                                         <AvatarImage src={user.image || "https://github.com/ka-be.png"} alt={user.name} />
                                         <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
@@ -79,7 +79,7 @@ export const Navbar = ({ user = { name: "Kevin", email: "kaabe@gmail.com" } }: N
                                 <DropdownMenuLabel className="font-normal">
                                     <div className="flex flex-col space-y-1">
                                         <p className="text-sm font-medium leading-none">Bonjour {user.name} !</p>
-                                        <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                                        <p className="text-xs leading-none text-muted-foreground/50">{user.email}</p>
                                     </div>
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
