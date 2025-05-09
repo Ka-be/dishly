@@ -9,7 +9,8 @@ import { RecipeCard } from "@/components/organisms/recipe-card"
 import { RecipeFilters } from "@/components/organisms/recipe-filters"
 import { recipes } from "@/data/recipes"
 import { Checkbox } from "@/components/ui/checkbox"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 type Filters = {
     mealType: string[]
     cuisineType: string[]
@@ -115,6 +116,8 @@ export function RecipeSearch() {
         activeFilters.dietaryRestrictions.length +
         activeFilters.difficulty.length +
         (activeFilters.maxTime < 120 ? 1 : 0)
+
+    const router = useRouter()
 
     return (
         <div className="w-full max-w-6xl mx-auto px-6">
@@ -222,9 +225,11 @@ export function RecipeSearch() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredRecipes.map((recipe) => (
-                        <Link key={recipe.id} href={`/recipes/${recipe.id}`}>
-                            <RecipeCard recipe={recipe} />
-                        </Link>
+                        <RecipeCard
+                            key={recipe.id}
+                            recipe={recipe}
+                            onClick={() => router.push(`/recipes/${recipe.id}`)}
+                        />
                     ))}
                 </div>
 

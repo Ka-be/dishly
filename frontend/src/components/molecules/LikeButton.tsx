@@ -8,7 +8,8 @@ import { FaHeart, FaRegHeart } from "react-icons/fa6";
 const LikeButton = () => {
     const [isLiked, setIsLiked] = useState(false);
 
-    const handleLike = () => {
+    const handleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         setIsLiked(!isLiked);
     };
 

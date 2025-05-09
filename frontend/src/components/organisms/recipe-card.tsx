@@ -7,14 +7,20 @@ import LikeButton from "@/components/molecules/LikeButton"
 
 interface RecipeCardProps {
     recipe: Recipe
+    onClick: () => void
 }
 
-export function RecipeCard({ recipe }: RecipeCardProps) {
+export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
     return (
-        <Card className="
-        overflow-hidden group px-2
-        hover:cursor-pointer hover:shadow-sm hover:scale-101
-        transition-all duration-300">
+        <Card
+            className="
+                overflow-hidden group px-2
+                hover:cursor-pointer hover:shadow-sm hover:scale-101
+                transition-all duration-300
+            "
+            data-slot="card"
+            onClick={onClick}
+        >
             <div className="relative aspect-video overflow-hidden">
                 <Image
                     src={recipe.image}
