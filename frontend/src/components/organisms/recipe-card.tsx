@@ -30,12 +30,8 @@ export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
                 />
             </div>
             <CardContent className="p-4">
-
                 <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold text-lg line-clamp-1">{recipe.name}</h3>
-                    <Badge variant="outline" className="text-xs">
-                        {recipe.cuisineType}
-                    </Badge>
                 </div>
                 <p className="text-sm text-gray-500 line-clamp-2 mb-3">{recipe.description}</p>
                 <div className="flex flex-wrap gap-3 text-sm text-gray-500">
@@ -53,8 +49,15 @@ export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
                     </div>
                 </div>
             </CardContent>
-            <CardFooter className="px-4 pt-0">
+            <CardFooter className="px-4 pt-0 flex justify-between items-center">
+                <div className="flex flex-wrap gap-2 justify-start items-center">
+                    <Badge variant="secondary" className="text-xs">
+                        {recipe.cuisineType}
+                    </Badge>
+                </div>
+
                 <LikeButton />
+
             </CardFooter>
         </Card>
     )
