@@ -1,9 +1,9 @@
 import Image from "next/image"
-import { Clock, ChefHat, Heart, Users } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Clock, ChefHat, Users } from "lucide-react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import type { Recipe } from "../@types/recipe"
+import type { Recipe } from "../../@types/recipe"
+import LikeButton from "@/components/molecules/LikeButton"
 
 interface RecipeCardProps {
     recipe: Recipe
@@ -13,25 +13,18 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
     return (
         <Card className="
         overflow-hidden group px-2
-        hover:cursor-pointer hover:shadow-lg
+        hover:cursor-pointer hover:shadow-sm hover:scale-101
         transition-all duration-300">
             <div className="relative aspect-video overflow-hidden">
                 <Image
                     src={recipe.image}
                     alt={recipe.name}
                     fill
-                    className="object-cover transition-transform group-hover:scale-105"
+                    className="rounded-xs object-cover transition-transform group-hover:scale-105"
                 />
-                <Button
-                    size="icon"
-                    variant="ghost"
-                    className="absolute top-2 right-2 bg-white/80 hover:bg-white/90 rounded-sm h-8 w-8"
-                >
-                    <Heart className="h-4 w-4" />
-                    <span className="sr-only">Ajouter aux favoris</span>
-                </Button>
             </div>
             <CardContent className="p-4">
+
                 <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold text-lg line-clamp-1">{recipe.name}</h3>
                     <Badge variant="outline" className="text-xs">
@@ -54,11 +47,9 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
                     </div>
                 </div>
             </CardContent>
-            {/* <CardFooter className="p-4 pt-0">
-                <Button variant="default" className="w-full">
-                    Modifier la recette
-                </Button>
-            </CardFooter> */}
+            <CardFooter className="px-4 pt-0">
+                <LikeButton />
+            </CardFooter>
         </Card>
     )
 }

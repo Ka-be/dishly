@@ -1,6 +1,6 @@
 import { recipes } from "@/data/recipes" // ou récupère depuis une API/DB
 import { notFound } from "next/navigation"
-import { Navbar } from "@/components/Navbar"
+import { Navbar } from "@/components/molecules/Navbar"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"

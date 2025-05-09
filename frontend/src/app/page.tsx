@@ -1,7 +1,7 @@
 
-import { RecipeSearch } from "@/components/recipe-search"
-import { Navbar } from "@/components/Navbar"
-
+import { RecipeSearch } from "@/components/organisms/recipe-search"
+import LikeButton from "@/components/molecules/LikeButton"
+import { Navbar } from "@/components/molecules/Navbar"
 export default function HomePage() {
     return (
         <div className="flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-outfit)]">
