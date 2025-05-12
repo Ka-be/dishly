@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Sliders, Utensils, X } from "lucide-react"
+import { ClockPlus, Heart, Search, Sliders, Utensils, X, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -10,6 +10,15 @@ import { RecipeFilters } from "@/components/organisms/recipe-filters"
 import { recipes } from "@/data/recipes"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useRouter } from "next/navigation"
+import { ScrollArea } from "@/components/ui/scroll-area"
+
+import {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+} from "@/components/ui/tabs"
+
 
 type Filters = {
     mealType: string[]
@@ -122,7 +131,7 @@ export function RecipeSearch() {
     return (
         <div className="w-full max-w-6xl mx-auto px-6">
             <div className="relative">
-                <div className="flex items-center border rounded-sm shadow-xs overflow-hidden bg-background">
+                <div className="flex items-center border rounded-sm shadow-xs overflow-hidden">
                     <div className="flex-1 flex items-center pl-4">
                         <Search className="h-5 w-5 text-gray-400 mr-2" />
                         <Input
@@ -209,11 +218,56 @@ export function RecipeSearch() {
                 )}
 
             <div className="mt-8">
-                <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-semibold">
-                        {filteredRecipes.length} {filteredRecipes.length === 1 ? "recette trouvée" : "recettes trouvées"}
-                    </h2>
-                    <div className="flex items-center gap-2">
+                <div className="flex flex-col md:flex-row w-full justify-between items-start gap-2 mb-4">
+                    <Tabs defaultValue="last-recipes">
+                        <TabsList className="mb-3 gap-1 bg-transparent">
+                            <TabsTrigger
+                                value="last-recipes"
+                                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-sm data-[state=active]:shadow-none cursor-pointer"
+                            >
+                                <ClockPlus
+                                    className="opacity-60"
+                                    size={16}
+                                    aria-hidden="true"
+                                />
+                                Dernières recettes
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="my-recipes"
+                                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-sm data-[state=active]:shadow-none cursor-pointer"
+                            >
+                                <BookOpen
+                                    className="opacity-60"
+                                    size={16}
+                                    aria-hidden="true"
+                                />
+                                Mes recettes
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="favorite-recipes"
+                                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-sm data-[state=active]:shadow-none cursor-pointer"
+                            >
+                                <Heart
+                                    className="opacity-60"
+                                    size={16}
+                                    aria-hidden="true"
+                                />
+                                Recettes likées
+                            </TabsTrigger>
+                        </TabsList>
+                        <ScrollArea className="w-full">
+                            <TabsContent value="last-recipes">
+                                Dernières recettes
+                            </TabsContent>
+                            <TabsContent value="my-recipes">
+                                Mes recettes
+                            </TabsContent>
+                            <TabsContent value="favorite-recipes">
+                                Recettes likées
+                            </TabsContent>
+                        </ScrollArea>
+                    </Tabs>
+                    <div className="flex items-center gap-2 ">
                         <span className="text-sm text-gray-500">Trier par:</span>
                         <select className="text-sm border rounded-sm px-2 py-1">
                             <option>Popularité</option>
