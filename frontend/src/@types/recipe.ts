@@ -7,7 +7,7 @@ export interface Recipe {
     image: string
     cookingTime: number
     difficulty: string
-    servings: number
+    portions: number
     mealType: string
     cuisineType: string
     dietaryRestrictions: string[]

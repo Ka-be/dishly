@@ -35,11 +35,11 @@ export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
                 </header>
                 <div className="w-full flex flex-row items-center justify-between">
                     <section className="w-full flex flex-row items-center justify-between  flex-2">
-                        <IngredientsTable ingredients={recipe.ingredients} />
+                        <IngredientsTable ingredients={recipe.ingredients} basePortions={recipe.portions} />
                     </section>
-                    <section className="w-full flex flex-row items-center justify-between flex-3">
-                        <div className="">
-                            <p>{recipe.description}</p>
+                    <section className="w-full flex flex-row items-center justify-end flex-3 ">
+                        <div className="text-right">
+                            <p>Ceci est une etape de la recette</p>
                         </div>
                     </section>
                 </div>
