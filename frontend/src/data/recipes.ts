@@ -1,6 +1,7 @@
 // Mock data des recettes
 
-import type { Recipe } from "../@types/recipe"
+import type { Recipe } from "../@types/recipe";
+import { ingredients } from "./ingredients"
 
 export const recipes: Recipe[] = [
   {
@@ -14,16 +15,7 @@ export const recipes: Recipe[] = [
     mealType: "Dîner",
     cuisineType: "Française",
     dietaryRestrictions: ["Végétarien", "Végétalien", "Sans gluten"],
-    ingredients: [
-      "2 aubergines",
-      "3 courgettes",
-      "2 poivrons",
-      "4 tomates",
-      "1 oignon",
-      "3 gousses d'ail",
-      "Herbes de Provence",
-      "Huile d'olive",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 1),
     instructions: [
       "Couper tous les légumes en dés",
       "Faire revenir l'oignon et l'ail dans l'huile d'olive",
@@ -43,16 +35,7 @@ export const recipes: Recipe[] = [
     mealType: "Dîner",
     cuisineType: "Italienne",
     dietaryRestrictions: ["Végétarien"],
-    ingredients: [
-      "300g de riz arborio",
-      "250g de champignons de Paris",
-      "1 oignon",
-      "2 gousses d'ail",
-      "100ml de vin blanc sec",
-      "1L de bouillon de légumes",
-      "50g de parmesan râpé",
-      "30g de beurre",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 2),
     instructions: [
       "Faire revenir l'oignon et l'ail dans le beurre",
       "Ajouter les champignons émincés",
@@ -73,16 +56,7 @@ export const recipes: Recipe[] = [
     mealType: "Déjeuner",
     cuisineType: "Mexicaine",
     dietaryRestrictions: [],
-    ingredients: [
-      "500g de blanc de poulet",
-      "8 tortillas de maïs",
-      "1 avocat",
-      "1 tomate",
-      "1 oignon rouge",
-      "1 citron vert",
-      "Coriandre fraîche",
-      "Épices mexicaines",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 3),
     instructions: [
       "Mariner le poulet avec les épices",
       "Cuire le poulet à la poêle",
@@ -103,23 +77,13 @@ export const recipes: Recipe[] = [
     mealType: "Déjeuner",
     cuisineType: "Américaine",
     dietaryRestrictions: [],
-    ingredients: [
-      "1 laitue romaine",
-      "200g de blanc de poulet",
-      "50g de parmesan",
-      "2 tranches de pain pour les croûtons",
-      "1 jaune d'œuf",
-      "1 gousse d'ail",
-      "Anchois",
-      "Huile d'olive",
-      "Jus de citron",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 4),
     instructions: [
-      "Griller le poulet et le couper en morceaux",
-      "Préparer les croûtons au four",
-      "Mélanger le jaune d'œuf, l'ail, les anchois pour la sauce",
-      "Laver et couper la salade",
-      "Assembler tous les ingrédients et ajouter la sauce",
+      "Faire tremper les nouilles dans l'eau chaude",
+      "Faire sauter l'ail et les crevettes",
+      "Ajouter les œufs battus",
+      "Incorporer les nouilles et les sauces",
+      "Ajouter les germes de soja",
     ],
   },
   {
@@ -133,18 +97,7 @@ export const recipes: Recipe[] = [
     mealType: "Dîner",
     cuisineType: "Asiatique",
     dietaryRestrictions: [],
-    ingredients: [
-      "200g de nouilles de riz",
-      "300g de crevettes",
-      "2 œufs",
-      "100g de germes de soja",
-      "2 gousses d'ail",
-      "2 c. à soupe de sauce de poisson",
-      "2 c. à soupe de sauce soja",
-      "1 citron vert",
-      "Cacahuètes concassées",
-      "Coriandre fraîche",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 5),
     instructions: [
       "Faire tremper les nouilles dans l'eau chaude",
       "Faire sauter l'ail et les crevettes",
@@ -165,15 +118,7 @@ export const recipes: Recipe[] = [
     mealType: "Dessert",
     cuisineType: "Italienne",
     dietaryRestrictions: ["Végétarien"],
-    ingredients: [
-      "250g de mascarpone",
-      "3 œufs",
-      "100g de sucre",
-      "200g de biscuits à la cuillère",
-      "200ml de café fort",
-      "Cacao en poudre",
-      "2 c. à soupe d'amaretto (facultatif)",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 6),
     instructions: [
       "Séparer les blancs des jaunes d'œufs",
       "Mélanger les jaunes avec le sucre puis le mascarpone",
@@ -194,16 +139,7 @@ export const recipes: Recipe[] = [
     mealType: "Dîner",
     cuisineType: "Française",
     dietaryRestrictions: ["Végétarien"],
-    ingredients: [
-      "6 gros oignons",
-      "2 c. à soupe de beurre",
-      "1 c. à soupe de farine",
-      "1L de bouillon de bœuf ou de légumes",
-      "100ml de vin blanc sec",
-      "4 tranches de pain",
-      "150g de gruyère râpé",
-      "Thym frais",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 7),
     instructions: [
       "Émincer les oignons et les faire caraméliser lentement",
       "Ajouter la farine puis déglacer au vin blanc",
@@ -224,16 +160,7 @@ export const recipes: Recipe[] = [
     mealType: "Apéritif",
     cuisineType: "Méditerranéenne",
     dietaryRestrictions: ["Végétarien", "Végétalien", "Sans gluten"],
-    ingredients: [
-      "400g de pois chiches cuits",
-      "2 c. à soupe de tahini",
-      "2 gousses d'ail",
-      "Le jus d'un citron",
-      "4 c. à soupe d'huile d'olive",
-      "1 c. à café de cumin",
-      "Sel et poivre",
-      "Paprika pour la décoration",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 8),
     instructions: [
       "Mixer tous les ingrédients sauf l'huile d'olive",
       "Ajouter l'huile progressivement en mixant",
@@ -252,16 +179,7 @@ export const recipes: Recipe[] = [
     mealType: "Petit-déjeuner",
     cuisineType: "Américaine",
     dietaryRestrictions: ["Végétarien"],
-    ingredients: [
-      "200g de farine",
-      "2 œufs",
-      "30g de sucre",
-      "300ml de lait",
-      "1 sachet de levure chimique",
-      "150g de myrtilles fraîches",
-      "Beurre pour la cuisson",
-      "Sirop d'érable",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 9),
     instructions: [
       "Mélanger la farine, le sucre et la levure",
       "Ajouter les œufs et le lait progressivement",
@@ -283,17 +201,7 @@ export const recipes: Recipe[] = [
     mealType: "Déjeuner",
     cuisineType: "Méditerranéenne",
     dietaryRestrictions: ["Végétarien", "Végétalien"],
-    ingredients: [
-      "200g de persil plat",
-      "100g de menthe fraîche",
-      "100g de boulgour fin",
-      "4 tomates",
-      "1 concombre",
-      "4 oignons nouveaux",
-      "Le jus de 2 citrons",
-      "6 c. à soupe d'huile d'olive",
-      "Sel et poivre",
-    ],
+    ingredients: ingredients.filter(i => i.recipeId === 10),
     instructions: [
       "Faire tremper le boulgour dans de l'eau froide pendant 30 minutes",
       "Hacher finement le persil et la menthe",
