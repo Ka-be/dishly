@@ -1,3 +1,5 @@
+import type { Ingredient } from "./ingredient"
+
 export interface Recipe {
     id: number
     name: string
@@ -5,10 +7,10 @@ export interface Recipe {
     image: string
     cookingTime: number
     difficulty: string
-    servings: number
+    portions: number
     mealType: string
     cuisineType: string
     dietaryRestrictions: string[]
-    ingredients: string[]
+    ingredients: Ingredient[]
     instructions: string[]
-  }
+}
