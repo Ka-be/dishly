@@ -40,17 +40,36 @@ services:
     networks:
       - dishly-network
 
-  frontend:
-    build: ./frontend
+  client:
+    build: ./client
     restart: on-failure
     depends_on:
       - api
     ports:
-      - "3000:3000"
+      - "8081:8081"  # Metro bundler
+      - "19000:19000" # Expo DevTools
+      - "19001:19001" # Expo DevTools
+      - "19002:19002" # Expo DevTools
     volumes:
-      - ./frontend:/app
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+    command: npx expo start --web
     networks:
       - dishly-network
+
+  # nextjs:
+  #   build: ./nextjs
+  #   restart: on-failure
+  #   depends_on:
+  #     - api
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./nextjs:/app
+  #   networks:
+  #     - dishly-network
 
   # nginx:
   #   image: nginx:alpine

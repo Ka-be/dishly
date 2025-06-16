@@ -1,0 +1,11 @@
+FROM node:latest
+WORKDIR /app/client
+
+COPY ./client/package.json ./
+RUN npm install
+
+COPY ./client ./
+
+EXPOSE 8081
+
+CMD ["npx", "expo", "start"]
