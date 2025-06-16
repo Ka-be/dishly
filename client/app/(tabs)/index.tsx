@@ -199,13 +199,14 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       {/* Header avec titre */}
       <View style={styles.header}>
-        <Logo
+        {/* <Logo
           primary={colors.tint}
           secondary={colorScheme === 'dark' ? '#2A2D30' : '#f1f3f4'}
           background={colors.background}
           width={120}
           height={30}
-        />
+        /> */}
+        <Text style={styles.title}>Dishly</Text>
       </View>
 
       {/* Barre de recherche */}
