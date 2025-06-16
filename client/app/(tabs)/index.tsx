@@ -16,6 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/Colors';
 import { Recipe } from '@/@types/recipe';
 import mockRecipes from '@/mock/recipes';
+import Logo from '@/components/Logo';
 
 const { width } = Dimensions.get('window');
 const cardWidth = (width - 48) / 2; // 2 colonnes avec padding
@@ -49,7 +50,7 @@ export default function HomeScreen() {
         <Text style={[styles.cardDescription, { color: colors.icon }]} numberOfLines={2}>
           {recipe.description}
         </Text>
-        
+
         <View style={styles.cardInfo}>
           <View style={styles.infoItem}>
             <Ionicons name="time-outline" size={16} color={colors.icon} />
@@ -198,7 +199,13 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       {/* Header avec titre */}
       <View style={styles.header}>
-        <Text style={styles.title}>Dishly</Text>
+        <Logo
+          primary={colors.tint}
+          secondary={colorScheme === 'dark' ? '#2A2D30' : '#f1f3f4'}
+          background={colors.background}
+          width={120}
+          height={30}
+        />
       </View>
 
       {/* Barre de recherche */}
@@ -218,7 +225,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           )}
         </View>
-        
+
         <TouchableOpacity style={styles.filterButton}>
           <Ionicons name="options-outline" size={20} color={colors.text} />
         </TouchableOpacity>
