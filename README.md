@@ -15,7 +15,7 @@ A mobile application that will allow you to create your own cooking recipes and 
 
 ## 🛠 Tech Stack
 
-[![Website stack](https://skillicons.dev/icons?i=next,ts,tailwindcss,react,graphql,apollo,postgres,prisma,docker,nginx,jest,cypress&perline=6)](https://kevinbourgitteau.fr)
+[![Website stack](https://skillicons.dev/icons?i=react,tailwindcss,graphql,apollo,postgres,prisma,docker,nginx,jest,cypress&perline=6)](https://kevinbourgitteau.fr)
 
 
 ## 📲 Deployment
