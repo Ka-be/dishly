@@ -23,6 +23,15 @@ import { useResponsive } from '@/hooks/useResponsive';
 export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredRecipes, setFilteredRecipes] = useState(mockRecipes);
+  const [likedRecipes, setLikedRecipes] = useState<{ [key: number]: boolean }>({});
+  const [recipeLikes, setRecipeLikes] = useState<{ [key: number]: number }>(() => {
+    // Initialiser avec les likes du mock
+    const initialLikes: { [key: number]: number } = {};
+    mockRecipes.forEach(recipe => {
+      initialLikes[recipe.id] = recipe.likesCount || 0;
+    });
+    return initialLikes;
+  });
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
@@ -40,6 +49,23 @@ export default function HomeScreen() {
       );
       setFilteredRecipes(filtered);
     }
+  };
+
+  const toggleLike = (recipeId: number) => {
+    setLikedRecipes(prev => {
+      const newLikedState = { ...prev };
+      const wasLiked = newLikedState[recipeId] || false;
+      newLikedState[recipeId] = !wasLiked;
+
+      setRecipeLikes(prevLikes => ({
+        ...prevLikes,
+        [recipeId]: wasLiked
+          ? (prevLikes[recipeId] || 0) - 1
+          : (prevLikes[recipeId] || 0) + 1
+      }));
+
+      return newLikedState;
+    });
   };
 
   const RecipeCard = ({ recipe }: { recipe: Recipe }) => (
@@ -111,14 +137,41 @@ export default function HomeScreen() {
             </View>
 
             <Button
-              size="$2"
-              circular
-              icon={<Ionicons name="heart-outline" size={20} color={colors.tint} />}
               backgroundColor="transparent"
               borderWidth={0}
-              hoverStyle={{ backgroundColor: '$color3' }}
-              pressStyle={{ scale: 0.9 }}
-            />
+              padding={0}
+              hoverStyle={{ backgroundColor: 'transparent' }}
+              pressStyle={{ scale: 0.95 }}
+              onPress={() => toggleLike(recipe.id)}
+            >
+              <XStack
+                alignItems="center"
+                gap="$2"
+                style={[
+                  styles.likeContainer,
+                  {
+                    backgroundColor: likedRecipes[recipe.id] ? colors.secondary : "transparent",
+                    borderColor: likedRecipes[recipe.id] ? "transparent" : colors.icon,
+                  }
+                ]}
+              >
+                <Text style={[
+                  styles.likesCount,
+                  {
+                    color: likedRecipes[recipe.id] ? "#fff" : colors.icon,
+                    fontWeight: likedRecipes[recipe.id] ? '700' : '400'
+                  }
+                ]}>
+                  {recipeLikes[recipe.id] || 0}
+                </Text>
+
+                <Ionicons
+                  name={likedRecipes[recipe.id] ? "heart" : "heart-outline"}
+                  size={16}
+                  color={likedRecipes[recipe.id] ? "#fff" : colors.icon}
+                />
+              </XStack>
+            </Button>
           </XStack>
         </YStack>
       </Card.Footer>
@@ -186,6 +239,18 @@ export default function HomeScreen() {
     badgeText: {
       fontSize: 10,
       fontWeight: '500',
+    },
+    likesCount: {
+      fontSize: 12,
+      fontWeight: '500',
+    },
+    likeContainer: {
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      borderRadius: 6,
+      borderWidth: 1,
+      minWidth: 50,
+      justifyContent: 'center',
     },
   });
 

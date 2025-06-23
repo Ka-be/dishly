@@ -11,6 +11,7 @@ const mockRecipes: Recipe[] = [
       portions: 4,
       cuisineType: "Française",
       dietaryRestrictions: ["Végétarien", "Végétalien", "Sans gluten"],
+      likesCount: 23
     },
     {
       id: 2,
@@ -22,6 +23,7 @@ const mockRecipes: Recipe[] = [
       portions: 4,
       cuisineType: "Italienne",
       dietaryRestrictions: ["Végétarien"],
+      likesCount: 8
     },
     {
       id: 3,
@@ -33,6 +35,7 @@ const mockRecipes: Recipe[] = [
       portions: 4,
       cuisineType: "Mexicaine",
       dietaryRestrictions: [],
+      likesCount: 12
     },
 ];
 
