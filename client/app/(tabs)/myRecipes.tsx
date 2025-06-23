@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import {
-  View,
   Text,
   TextInput,
-  ScrollView,
   TouchableOpacity,
-  Image,
   StyleSheet,
   FlatList,
   Dimensions,
@@ -13,6 +10,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { Card, XStack, YStack, Image, Button, View } from 'tamagui';
 import { Colors } from '@/constants/Colors';
 import { Recipe } from '@/@types/recipe';
 import mockRecipes from '@/mock/recipes';
@@ -41,54 +39,92 @@ export default function HomeScreen() {
   };
 
   const RecipeCard = ({ recipe }: { recipe: Recipe }) => (
-    <TouchableOpacity style={[styles.card, { width: cardWidth, backgroundColor: colors.background }]}>
-      <Image source={{ uri: recipe.image }} style={styles.cardImage} />
-      <View style={styles.cardContent}>
-        <Text style={[styles.cardTitle, { color: colors.text }]} numberOfLines={1}>
-          {recipe.name}
-        </Text>
-        <Text style={[styles.cardDescription, { color: colors.icon }]} numberOfLines={2}>
-          {recipe.description}
-        </Text>
+    <Card
+      elevate
+      size="$4"
+      bordered
+      width={cardWidth}
+      marginBottom="$3"
+      overflow="hidden"
+      backgroundColor="$background"
+      hoverStyle={{ scale: 0.98 }}
+      pressStyle={{ scale: 0.96 }}
+      animation="bouncy"
+    >
+      <Card.Header padding="$0">
+        <Image
+          source={{ uri: recipe.image }}
+          width="100%"
+          height={120}
+          backgroundColor="$color2"
+        />
+      </Card.Header>
 
-        <View style={styles.cardInfo}>
-          <View style={styles.infoItem}>
-            <Ionicons name="time-outline" size={16} color={colors.icon} />
-            <Text style={[styles.infoText, { color: colors.icon }]}>{recipe.cookingTime} min</Text>
-          </View>
-          <View style={styles.infoItem}>
-            <Ionicons name="restaurant-outline" size={16} color={colors.icon} />
-            <Text style={[styles.infoText, { color: colors.icon }]}>{recipe.difficulty}</Text>
-          </View>
-        </View>
+      <Card.Footer padding="$3">
+        <YStack space="$2" flex={1}>
+ 
+          <Text
+            style={[styles.cardTitle, { color: colors.text }]}
+            numberOfLines={1}
+          >
+            {recipe.name}
+          </Text>
 
-        <View style={styles.cardFooter}>
-          <View style={[styles.badge, { backgroundColor: colorScheme === 'dark' ? '#2A2D30' : '#f1f3f4' }]}>
-            <Text style={[styles.badgeText, { color: colors.text }]}>{recipe.cuisineType}</Text>
-          </View>
-          <TouchableOpacity style={styles.likeButton}>
-            <Ionicons name="heart-outline" size={20} color={colors.tint} />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </TouchableOpacity>
+  
+          <Text
+            style={[styles.cardDescription, { color: colors.icon }]}
+            numberOfLines={2}
+          >
+            {recipe.description}
+          </Text>
+
+
+          <XStack alignItems="center">
+            <XStack alignItems="center">
+              <Ionicons name="time-outline" size={16} color={colors.icon} />
+              <Text style={[styles.infoText, { color: colors.icon }]}>
+                {recipe.cookingTime} min
+              </Text>
+            </XStack>
+            <XStack alignItems="center">
+              <Ionicons name="restaurant-outline" size={16} color={colors.icon} />
+              <Text style={[styles.infoText, { color: colors.icon }]}>
+                {recipe.difficulty}
+              </Text>
+            </XStack>
+          </XStack>
+
+
+          <XStack justifyContent="space-between" alignItems="center" marginTop="$2">
+            <View
+              style={[styles.badge, {
+                backgroundColor: colorScheme === 'dark' ? '#2A2D30' : '#f1f3f4'
+              }]}
+            >
+              <Text style={[styles.badgeText, { color: colors.text }]}>
+                {recipe.cuisineType}
+              </Text>
+            </View>
+
+            <Button
+              size="$2"
+              circular
+              icon={<Ionicons name="heart-outline" size={20} color={colors.tint} />}
+              backgroundColor="transparent"
+              borderWidth={0}
+              hoverStyle={{ backgroundColor: '$color3' }}
+              pressStyle={{ scale: 0.9 }}
+            />
+          </XStack>
+        </YStack>
+      </Card.Footer>
+    </Card>
   );
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: colors.background,
-    },
-    header: {
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      borderBottomWidth: 1,
-      borderBottomColor: colorScheme === 'dark' ? '#2A2D30' : '#f0f0f0',
-    },
-    title: {
-      fontSize: 28,
-      fontWeight: 'bold',
-      color: colors.text,
     },
     searchContainer: {
       flexDirection: 'row',
@@ -130,56 +166,16 @@ export default function HomeScreen() {
     row: {
       justifyContent: 'space-between',
     },
-    card: {
-      borderRadius: 12,
-      marginBottom: 16,
-      shadowColor: colorScheme === 'dark' ? '#000' : '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: colorScheme === 'dark' ? 0.3 : 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-      overflow: 'hidden',
-      borderWidth: colorScheme === 'dark' ? 1 : 0,
-      borderColor: colorScheme === 'dark' ? '#2A2D30' : 'transparent',
-    },
-    cardImage: {
-      width: '100%',
-      height: 120,
-      backgroundColor: colorScheme === 'dark' ? '#2A2D30' : '#f0f0f0',
-    },
-    cardContent: {
-      padding: 12,
-    },
     cardTitle: {
       fontSize: 16,
       fontWeight: '600',
-      marginBottom: 4,
     },
     cardDescription: {
       fontSize: 12,
       lineHeight: 16,
-      marginBottom: 8,
-    },
-    cardInfo: {
-      flexDirection: 'row',
-      gap: 12,
-      marginBottom: 8,
-    },
-    infoItem: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 4,
     },
     infoText: {
       fontSize: 12,
-    },
-    cardFooter: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
     },
     badge: {
       paddingHorizontal: 8,
@@ -190,17 +186,14 @@ export default function HomeScreen() {
       fontSize: 10,
       fontWeight: '500',
     },
-    likeButton: {
-      padding: 4,
-    },
   });
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header avec titre */}
-      <Header title="Mes recettes"/>
 
-      {/* Barre de recherche */}
+      <Header title="Mes recettes" />
+
+
       <View style={styles.searchContainer}>
         <View style={styles.searchBar}>
           <Ionicons name="search" size={20} color={colors.icon} style={styles.searchIcon} />
@@ -223,7 +216,7 @@ export default function HomeScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Liste des recettes */}
+      
       <FlatList
         data={filteredRecipes}
         renderItem={({ item }) => <RecipeCard recipe={item} />}
