@@ -3,12 +3,12 @@
 <!-- 
 ![Status](https://img.shields.io/badge/Status-Finished-20bf6b?style=flat-square) -->
 
-<img src="./frontend/public/banner.webp" width=50%>
+<img src="./nextjs/public/banner.webp" width=50%>
 
 A mobile application that will allow you to create your own cooking recipes and easily recreate them, step by step.
 
 
-## 🛠 Documentation
+## 🛠 Documentation (WIP)
 * Specifications : [French 🇫🇷](./documentation/specs-fr.md) 
 * [How to start the project](./documentation/start-project.md)
 
@@ -20,6 +20,10 @@ A mobile application that will allow you to create your own cooking recipes and 
 
 ## 📲 Deployment
 [![Deployment stack](https://skillicons.dev/icons?i=vercel,supabase&perline=3)](https://kevinbourgitteau.fr/)
+
+## 📸 Screenshots
+<img src="./documentation/images/screenshot.png" height=800px>
+
 
 
 🔗 Links
@@ -35,9 +39,5 @@ A mobile application that will allow you to create your own cooking recipes and 
 
 
 
-<!-- ## 📸 Screenshots
 
-<img src="img/screenshot.png" width=50%>
-
---- -->
 
