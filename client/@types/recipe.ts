@@ -8,4 +8,5 @@ export interface Recipe {
 	portions: number;
 	cuisineType: string;
 	dietaryRestrictions: string[];
+	likesCount: number;
 }

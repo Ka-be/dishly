@@ -1,10 +1,11 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { HapticTab } from '@/components/HapticTab';
 import TabBarBackground from '@/components/ui/TabBarBackground';
+import AddButton from '@/components/ui/AddButton';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -14,7 +15,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].secondary,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
@@ -26,7 +27,7 @@ export default function TabLayout() {
           default: {},
         }),
       }}>
-      
+
       <Tabs.Screen
         name="index"
         options={{
@@ -36,13 +37,17 @@ export default function TabLayout() {
           ),
         }}
       />
-      
+
       <Tabs.Screen
         name="newRecipe"
         options={{
           title: 'Nouvelle recette',
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="add-circle" size={28} color={color} />
+            <AddButton
+              width={42}
+              height={42}
+              background={Colors[colorScheme ?? 'light'].background}
+            />
           ),
         }}
       />
@@ -52,7 +57,7 @@ export default function TabLayout() {
         options={{
           title: 'Mes recettes',
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="menu-book" size={28} color={color} />
+            <MaterialIcons name="menu-book" size={24} color={color} />
           ),
         }}
       />

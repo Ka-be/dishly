@@ -58,7 +58,7 @@ export default function HomeScreen() {
     >
       <Card.Header padding="$0">
         <Image
-          source={{uri: recipe.image }}
+          source={{ uri: recipe.image }}
           width={cardWidth}
           height={200}
         />
@@ -84,13 +84,13 @@ export default function HomeScreen() {
 
           {/* Info temps et difficulté */}
           <XStack alignItems="center" justifyContent="space-between" marginTop="$2">
-            <XStack alignItems="center">
+            <XStack alignItems="center" gap="$1">
               <Ionicons name="time-outline" size={16} color={colors.icon} />
               <Text style={[styles.infoText, { color: colors.icon }]}>
                 {recipe.cookingTime} min
               </Text>
             </XStack>
-            <XStack alignItems="center">
+            <XStack alignItems="center" gap="$1">
               <Ionicons name="restaurant-outline" size={16} color={colors.icon} />
               <Text style={[styles.infoText, { color: colors.icon }]}>
                 {recipe.difficulty}
@@ -102,7 +102,7 @@ export default function HomeScreen() {
           <XStack justifyContent="space-between" alignItems="center" marginTop="$2">
             <View
               style={[styles.badge, {
-                backgroundColor: colorScheme === 'dark' ? '#2A2D30' : '#f1f3f4'
+                backgroundColor: colors.badge
               }]}
             >
               <Text style={[styles.badgeText, { color: colors.text }]}>
@@ -222,7 +222,7 @@ export default function HomeScreen() {
         renderItem={({ item }) => <RecipeCard recipe={item} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={columns}
-        key={columns} // Force re-render quand le nombre de colonnes change
+        key={columns}
         contentContainerStyle={styles.recipesList}
         showsVerticalScrollIndicator={false}
       />
