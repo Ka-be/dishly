@@ -198,7 +198,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       {/* Header avec titre */}
-      <Header title="Accueil"/>
+      <Header title="Mes recettes"/>
 
       {/* Barre de recherche */}
       <View style={styles.searchContainer}>
