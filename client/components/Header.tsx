@@ -125,7 +125,7 @@ export default function Header({
                     onPress={() => setShowMenu(true)}
                 >
                     <Text style={styles.avatarText}>KB</Text>
-                    {/* Tu peux remplacer par une vraie photo plus tard */}
+                    {/* Avatar photo here */}
                 </TouchableOpacity>
             </View>
 
