@@ -5,7 +5,7 @@
 
 <!-- ![Status](https://img.shields.io/badge/Status-Finished-20bf6b?style=flat-square) -->
 
-<img src="./documentation/images/banner.webp" width=50%>
+<img src="./documentation/images/logo_full.webp" width=50%>
 
 A mobile and web application that allows you to create, save, and follow your cooking recipes step-by-step. Featuring an innovative "cooking mode" with integrated timers and swipeable steps, perfect for use in the kitchen.
 
