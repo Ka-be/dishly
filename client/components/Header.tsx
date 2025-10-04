@@ -31,10 +31,9 @@ export default function Header({
         { id: 5, title: 'Déconnexion', icon: 'log-out-outline', isLogout: true },
     ];
 
-    const handleMenuPress = (item: any) => {
+    const handleMenuPress = () => {
         setShowMenu(false);
        // Logic for item menu
-        console.log('Menu sélectionné:', item.title);
     };
 
     const styles = StyleSheet.create({
@@ -148,7 +147,7 @@ export default function Header({
                                     styles.menuItem,
                                     index === menuItems.length - 1 && styles.lastMenuItem,
                                 ]}
-                                onPress={() => handleMenuPress(item)}
+                                onPress={handleMenuPress}
                             >
                                 <Ionicons
                                     name={item.icon as any}

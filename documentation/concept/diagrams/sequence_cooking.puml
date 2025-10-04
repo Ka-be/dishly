@@ -1,0 +1,56 @@
+@startuml sequence_cooking
+actor Utilisateur as user
+participant "Expo App" as app
+participant "Timer Manager" as timer
+participant "Notification Service" as notif
+
+user -> app: Ouvre une recette
+activate app
+app --> user: Affiche recette (tabs: Ingrédients / Étapes)
+
+user -> app: Passe en "Mode Pas-à-Pas"
+app -> app: Affiche Étape 1 en plein écran
+
+user -> app: Lit l'étape
+
+alt Étape avec timer
+  app --> user: Affiche bouton "Démarrer timer (20 min)"
+  user -> app: Clique sur "Démarrer timer"
+  
+  app -> timer: startTimer(stepId, 1200 secondes)
+  activate timer
+  timer -> timer: Ajoute timer à la pile
+  timer --> app: Timer démarré
+  app --> user: Timer affiché dans la barre du haut
+  
+  user -> app: Swipe vers la droite
+  app -> app: Affiche Étape 2
+  
+  note right
+    Le timer continue de tourner
+    en arrière-plan même si
+    l'utilisateur change d'étape
+  end note
+  
+  ... Temps passe (20 minutes) ...
+  
+  timer -> timer: Timer atteint 0
+  timer -> notif: Déclenche notification
+  activate notif
+  notif --> user: 🔔 Notification "Étape 1 terminée"
+  notif -> app: Vibration + son
+  deactivate notif
+  
+  app --> user: Affiche popup "Étape 1 : Sortir du four"
+  deactivate timer
+end
+
+user -> app: Continue les étapes suivantes
+app -> app: Swipe entre les étapes
+
+user -> app: Termine la dernière étape
+app --> user: "Recette terminée ! 🎉"
+app --> user: Options : "Retour" | "Recommencer"
+
+deactivate app
+@enduml

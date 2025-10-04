@@ -9,8 +9,7 @@ A mobile application that will allow you to create your own cooking recipes and 
 
 
 ## 🛠 Documentation (WIP)
-* Specifications : [French 🇫🇷](./documentation/specs-fr.md) 
-* [How to start the project](./documentation/start-project.md)
+Specifications : [French 🇫🇷](./documentation/specs-fr.md) 
 
 
 ## 🛠 Tech Stack

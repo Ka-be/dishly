@@ -1,75 +1,53 @@
-@startuml architecture
+@startuml
+!define RECTANGLE_STYLE skinparam rectangle {\n    BackgroundColor<<frontend>> LightBlue\n    BackgroundColor<<backend>> LightGreen\n    BackgroundColor<<external>> LightYellow\n}
 
+title Architecture Dishly - Supabase Stack
 
-node "Frontend" {
-    component Client [
-        App Expo + React-Native
-        node:20-alpine
-    ]
+' Frontend
+rectangle "Frontend" <<frontend>> {
+    component [Expo App\nReact Native\n(iOS, Android, Web)] as Client
+    note right of Client
+        - Expo Router
+        - Tamagui UI
+        - @supabase/supabase-js
+    end note
 }
 
-node "Middleware" {
-    component Auth[
-        App Expo + React-Native
-        node:20-alpine
-    ]
-}
-
-node "Backend" {
-    component Trip [
-        Trip_service
-        node:20-alpine
-    ]
-    component User [
-        User_service
-        node:20-alpine
-    ]
-
-    component Resa [
-        Reservation_service
-        node:20-alpine
-    ]
-
-    component Review [
-        Review_service
-        node:20-alpine
-    ]
+' Supabase Backend
+rectangle "Supabase (Backend)" <<backend>> {
+    component [Auth\nService] as Auth
+    component [PostgreSQL\nDatabase] as DB
+    component [Storage\n(Images)] as Storage
+    component [PostgREST\nAuto-generated API] as API
+    component [Edge Functions\n(Logique métier)] as Functions
     
-    port API 
-    API - [Trip]
-    API - [Auth]
-    API - [Resa]
-    API - [Review]
+    note right of Auth
+        - Google OAuth
+        - Email/Password
+        - JWT tokens
+    end note
+    
+    note right of DB
+        - Tables: profiles, recipes,
+          ingredients, steps, etc.
+        - Row Level Security (RLS)
+    end note
 }
 
-database "PostgreSQL" as pgsql {
-    component Trip_DB [
-        Trip_DB
-        postgis/postgis:13-master
-    ]
-    component User_DB [
-        User_DB
-        postgis/postgis:13-master
-    ]
-    component Reservation_DB [
-        Reservation_DB
-        postgis/postgis:13-master
-    ]
-    component Review_DB [
-        Review_DB
-        postgis/postgis:13-master
-    ]
+' External Services
+cloud "Services Externes" <<external>> {
+    component [Google OAuth] as Google
 }
 
-[Client] --- API
+' Connexions
+Client -down-> Auth : Authentification
+Client -down-> API : Requêtes REST/GraphQL
+Client -down-> Storage : Upload/Download images
+Client -down-> Functions : Logique métier
 
-[Auth] -down- [User]
-
-[Trip_DB] -up-[Trip]
-[User_DB] -up- [User]
-[Reservation_DB] -up- [Resa]
-[Review_DB] -up- [Review]
-
-[Prisma:latest] --- [pgsql]
-
+Auth -right-> Google : OAuth flow
+Auth -down-> DB : User management
+API -down-> DB : CRUD operations
+Storage -down-> DB : Metadata
+Functions -down-> DB : Custom queries
 @enduml

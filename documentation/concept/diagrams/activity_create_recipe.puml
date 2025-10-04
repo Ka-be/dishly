@@ -1,0 +1,65 @@
+@startuml
+start
+
+:Utilisateur clique sur "Créer une recette";
+
+:Remplir le titre de la recette;
+
+if (Titre valide ?) then (non)
+  :Afficher erreur "Minimum 3 caractères";
+  stop
+else (oui)
+  :Ajouter description (optionnel);
+  :Ajouter photo (optionnel);
+  :Définir nombre de portions (défaut: 4);
+  
+  partition "Ajout des ingrédients" {
+    repeat
+      :Sélectionner/créer un ingrédient;
+      :Définir quantité;
+      :Choisir unité de mesure;
+      :Ajouter l'ingrédient à la liste;
+    repeat while (Ajouter un autre ingrédient ?) is (oui)
+    -> non;
+  }
+  
+  if (Au moins 1 ingrédient ?) then (non)
+    :Afficher erreur "Minimum 1 ingrédient requis";
+    stop
+  else (oui)
+    
+    partition "Ajout des étapes" {
+      repeat
+        :Créer une nouvelle étape;
+        :Rédiger la description;
+        :Ajouter timer (optionnel);
+        :Ajouter photo (optionnel);
+        note right
+          L'ordre est automatique
+          mais peut être réorganisé
+          par drag & drop
+        end note
+      repeat while (Ajouter une autre étape ?) is (oui)
+      -> non;
+    }
+    
+    if (Au moins 1 étape ?) then (non)
+      :Afficher erreur "Minimum 1 étape requise";
+      stop
+    else (oui)
+      
+      partition "Catégorisation" {
+        :Ajouter tags (optionnel);
+        :Ajouter catégories (optionnel);
+        :Définir visibilité (publique/privée);
+      }
+      
+      :Enregistrer la recette;
+      :Afficher message de succès;
+      :Rediriger vers la recette créée;
+    endif
+  endif
+endif
+
+stop
+@enduml

@@ -1,0 +1,54 @@
+@startuml sequence_login
+actor Utilisateur as user
+participant "Expo App" as app
+participant "Supabase Auth" as auth
+participant "Google OAuth" as google
+participant "PostgreSQL" as db
+
+user -> app: Clique sur "Se connecter avec Google"
+activate app
+
+app -> auth: signInWithOAuth('google')
+activate auth
+
+auth -> google: Redirection vers Google Login
+activate google
+
+user -> google: Entre identifiants Google
+google -> google: Vérifie les identifiants
+
+alt Authentification réussie
+  google --> auth: Retourne access token + user info
+  deactivate google
+  
+  auth -> auth: Génère JWT token
+  auth -> db: Vérifie si user existe
+  activate db
+  
+  alt Première connexion
+    db --> auth: User n'existe pas
+    auth -> db: INSERT INTO auth.users
+    auth -> db: INSERT INTO profiles (firstname, lastname, avatar_url)
+    db --> auth: User créé
+  else Connexion existante
+    db --> auth: User existe
+    auth -> db: UPDATE profiles.updated_at
+    db --> auth: Profil mis à jour
+  end
+  
+  deactivate db
+  
+  auth --> app: Retourne session (JWT token, user data)
+  deactivate auth
+  
+  app -> app: Stocke session (SecureStore)
+  app --> user: Redirection vers l'accueil
+  deactivate app
+  
+else Authentification échouée
+  google --> auth: Erreur d'authentification
+  auth --> app: Erreur
+  app --> user: Affiche message d'erreur
+end
+
+@enduml

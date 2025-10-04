@@ -1,38 +1,83 @@
-@startuml
+@startuml usecases
 left to right direction
 
-actor Utilisateur as user
-actor Admin as admin
+actor "Utilisateur" as user
+actor "Admin" as admin
 
-rectangle "Dishly" {
+rectangle "Dishly - Gestion des Recettes" {
+  
+  package "Authentification" {
+    usecase "S'inscrire" as UC1
+    usecase "Se connecter (Google OAuth)" as UC2
+    usecase "Se déconnecter" as UC2b
+  }
+  
+  package "Gestion Profil" {
+    usecase "Modifier ses informations" as UC5
+    usecase "Voir son profil" as UC5b
+  }
+  
+  package "Gestion Recettes" {
+    usecase "Voir ses recettes" as UC6
+    usecase "Voir toutes les recettes publiques" as UC7
+    usecase "Créer une recette" as UC8
+    usecase "Modifier une recette" as UC9
+    usecase "Supprimer une recette" as UC10
+    usecase "Ajouter en favoris" as UC11
+    usecase "Rechercher des recettes" as UC12
+  }
+  
+  package "Consultation Recette" {
+    usecase "Consulter une recette" as UC13
+    usecase "Ajuster les portions" as UC14
+    usecase "Mode pas-à-pas" as UC15
+    usecase "Gérer les timers" as UC16
+  }
+  
+  package "Administration" #LightCoral {
+    usecase "Voir tous les utilisateurs" as UC20
+    usecase "Modifier un utilisateur" as UC3
+    usecase "Supprimer un utilisateur" as UC4
+    usecase "Voir toutes les recettes (privées incluses)" as UC21
+    usecase "Modérer les recettes" as UC22
+  }
+}
 
-usecase "S'inscrire" as UC1
-usecase "Se connecter" as UC2
-usecase "Modifier un utilisateur" as UC3
-usecase "Supprimer un utilisateur" as UC4
-usecase "Modifier ses informations" as UC5
-usecase "Voir ses recettes" as UC6
-usecase "Voir toutes les recettes" as UC7
-usecase "Créer une recette" as UC8
-usecase "Modifier une recette" as UC9
-usecase "Supprimer une recette" as UC10
-
-admin ..> user
-user -> UC1
-UC1 -> UC2
-user -> UC2
-
-admin -> UC3
-admin -> UC4
-admin -> UC7
-
+' Relations Utilisateur
+user --> UC1
+user --> UC2
+user --> UC2b
 user --> UC5
+user --> UC5b
 user --> UC6
+user --> UC7
 user --> UC8
 user --> UC9
 user --> UC10
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
 
-}
+' Relations Admin (hérite de User)
+admin --|> user
 
+admin --> UC3
+admin --> UC4
+admin --> UC20
+admin --> UC21
+admin --> UC22
+
+' Extensions
+UC13 ..> UC14 : <<extend>>
+UC13 ..> UC15 : <<extend>>
+UC15 ..> UC16 : <<include>>
+
+' Inclusions
+UC8 ..> UC2 : <<include>>
+UC9 ..> UC2 : <<include>>
+UC10 ..> UC2 : <<include>>
 
 @enduml

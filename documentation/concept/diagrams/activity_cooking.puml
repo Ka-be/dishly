@@ -1,0 +1,62 @@
+@startuml
+start
+
+:Utilisateur ouvre une recette;
+
+partition "Préparation" {
+  :Affichage onglet "Ingrédients";
+  
+  if (Ajuster les portions ?) then (oui)
+    :Modifier le nombre de personnes;
+    :Recalcul automatique des quantités;
+  else (non)
+  endif
+  
+  :Passer à l'onglet "Étapes";
+}
+
+:Activer le "Mode Pas-à-Pas";
+
+partition "Mode Pas-à-Pas" #LightBlue {
+  :Afficher Étape 1;
+  
+  repeat
+    :Lire l'instruction de l'étape;
+    
+    if (Étape avec timer ?) then (oui)
+      :Afficher bouton "Démarrer timer";
+      
+      if (Démarrer le timer ?) then (oui)
+        :Timer ajouté à la barre en haut;
+        :Timer démarre en arrière-plan;
+        note right
+          Le timer continue même
+          si l'utilisateur change d'étape
+        end note
+      else (non)
+      endif
+    else (non)
+    endif
+    
+    if (Étape terminée ?) then (oui)
+      :Swiper vers la droite;
+      :Passer à l'étape suivante;
+    else (non)
+      :Rester sur l'étape actuelle;
+    endif
+    
+    if (Timer terminé ?) then (oui)
+      :Notification + vibration;
+      :Afficher message "Étape X terminée";
+    else (non)
+    endif
+    
+  repeat while (Dernière étape ?) is (non)
+  -> oui;
+  
+  :Afficher "Recette terminée ! 🎉";
+  :Proposer "Retour" ou "Recommencer";
+}
+
+stop
+@enduml

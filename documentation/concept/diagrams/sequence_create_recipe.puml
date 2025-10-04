@@ -1,0 +1,77 @@
+@startuml sequence_create_recipe
+actor Utilisateur as user
+participant "Expo App" as app
+participant "Supabase Storage" as storage
+participant "Supabase API" as api
+participant "PostgreSQL" as db
+
+user -> app: Remplit le formulaire de recette
+activate app
+
+alt Upload d'image
+  user -> app: Sélectionne une photo
+  app -> storage: upload('recipes/image.jpg')
+  activate storage
+  storage --> app: Retourne image_url
+  deactivate storage
+end
+
+user -> app: Clique sur "Enregistrer"
+
+app -> app: Valide les données (titre, ingrédients, étapes)
+
+alt Validation réussie
+  app -> api: POST /recipes
+  activate api
+  
+  api -> db: BEGIN TRANSACTION
+  activate db
+  
+  ' Vérification RLS
+  api -> db: Vérifie auth.uid() = user_id
+  
+  alt Autorisation OK
+    db -> db: INSERT INTO recipes (title, image_url, servings, user_id)
+    db --> api: recipe_id
+    
+    loop Pour chaque ingrédient
+      api -> db: INSERT INTO recipe_ingredients
+      db --> api: OK
+    end
+    
+    loop Pour chaque étape
+      api -> db: INSERT INTO steps (recipe_id, order, description, timer)
+      db --> api: OK
+    end
+    
+    loop Pour chaque tag
+      api -> db: INSERT INTO recipe_tags
+      db --> api: OK
+    end
+    
+    loop Pour chaque catégorie
+      api -> db: INSERT INTO recipe_categories
+      db --> api: OK
+    end
+    
+    db -> db: COMMIT TRANSACTION
+    deactivate db
+    
+    api --> app: Recette créée (201 Created)
+    deactivate api
+    
+    app --> user: Affiche message de succès
+    app -> app: Redirection vers la recette
+    deactivate app
+    
+  else RLS Refusé
+    db --> api: Permission denied
+    api --> app: Erreur 403 Forbidden
+    app --> user: Message d'erreur
+  end
+  
+else Validation échouée
+  app --> user: Affiche erreurs de validation
+end
+
+@enduml

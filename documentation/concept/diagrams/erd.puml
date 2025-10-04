@@ -1,83 +1,125 @@
 @startuml
-' skinparam linetype ortho
+title Dishly - Entity Relationship Diagram
 
-entity "User" {
-    id
-  --
-    lastname : string
-    firstname : string
-    email : string
-    password : string
-    role_id : <<FK>> number
+' Entities
+entity "profiles" {
+    * id : uuid <<PK>>
+    --
+    * user_id : uuid <<FK>> (auth.users)
+    * firstname : varchar
+    * lastname : varchar
+    avatar_url : text
+    * role_id : uuid <<FK>>
+    * created_at : timestamp
+    * updated_at : timestamp
 }
 
-entity "Role" {
-    id
-  --
-    type: string
+entity "roles" {
+    * id : uuid <<PK>>
+    --
+    * name : varchar (user|admin)
+    * created_at : timestamp
 }
 
-entity "Recipe" {
-    id
-  --
-    title : string
-    image : string
-    servings : number
-    is_public : boolean
-    ingredients : <<FK>> number
-    tags : <<FK>> number
-    categories: <<FK>> number
-    user_id : <<FK>> number
-    steps : <<FK>> number
+entity "recipes" {
+    * id : uuid <<PK>>
+    --
+    * title : varchar
+    description : text
+    image_url : text
+    * servings : integer
+    prep_time : integer
+    cook_time : integer
+    * is_public : boolean
+    * user_id : uuid <<FK>>
+    * created_at : timestamp
+    * updated_at : timestamp
 }
 
-entity "Ingredient" {
-    id
-  --
-    name : string
+entity "ingredients" {
+    * id : uuid <<PK>>
+    --
+    * name : varchar
+    * created_at : timestamp
 }
 
-entity "RecipeIngredient" {
-    id
-  --
-    amount : number
-ingredient_id : <FK>> number
-unit : <<FK>> number
+entity "recipe_ingredients" {
+    * id : uuid <<PK>>
+    --
+    * recipe_id : uuid <<FK>>
+    * ingredient_id : uuid <<FK>>
+    * quantity : decimal
+    * unit_id : uuid <<FK>>
 }
 
-entity "Unit" {
-    id
-  --
-    name : string
+entity "units" {
+    * id : uuid <<PK>>
+    --
+    * name : varchar
+    abbreviation : varchar
 }
 
-entity "Tag" {
-    id
-  --
-    name : string
+entity "tags" {
+    * id : uuid <<PK>>
+    --
+    * name : varchar
+    * created_at : timestamp
 }
 
-entity "Category" {
-    id
-  --
-    name : string
+entity "categories" {
+    * id : uuid <<PK>>
+    --
+    * name : varchar
+    * created_at : timestamp
 }
 
-entity "Step" {
-    id
-  --
-    description : string
-    image : string
+entity "steps" {
+    * id : uuid <<PK>>
+    --
+    * recipe_id : uuid <<FK>>
+    * order : integer
+    * description : text
+    image_url : text
+    timer : integer
+    * created_at : timestamp
 }
 
-User }|--|| Role
-User ||--o{ Recipe
-Recipe ||--|{ RecipeIngredient
-Recipe }o--o{ Tag
-Recipe }o--|{ Category
-Recipe ||--|{ Step
-RecipeIngredient }o--|| Ingredient
-RecipeIngredient }o--|| Unit
+entity "recipe_tags" {
+    * recipe_id : uuid <<FK>>
+    * tag_id : uuid <<FK>>
+    --
+    <<composite PK>>
+}
 
+entity "recipe_categories" {
+    * recipe_id : uuid <<FK>>
+    * category_id : uuid <<FK>>
+    --
+    <<composite PK>>
+}
 
+entity "user_favorites" {
+    * id : uuid <<PK>>
+    --
+    * user_id : uuid <<FK>>
+    * recipe_id : uuid <<FK>>
+    * created_at : timestamp
+}
+
+' Relations
+profiles }o--|| roles : "has"
+profiles ||--o{ recipes : "owns"
+profiles ||--o{ user_favorites : "has"
+
+recipes ||--o{ recipe_ingredients : "contains"
+recipes ||--o{ steps : "has"
+recipes }o--o{ recipe_tags : "tagged with"
+recipes }o--o{ recipe_categories : "belongs to"
+recipes ||--o{ user_favorites : "favorited by"
+
+recipe_ingredients }o--|| ingredients : "uses"
+recipe_ingredients }o--|| units : "measured in"
+
+recipe_tags }o--|| tags : "links"
+recipe_categories }o--|| categories : "links"
 @enduml
