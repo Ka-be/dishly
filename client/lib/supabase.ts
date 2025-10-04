@@ -9,20 +9,27 @@ const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
 const ExpoSecureStoreAdapter = {
 	getItem: (key: string) => {
 		if (Platform.OS === "web") {
-			return Promise.resolve(localStorage.getItem(key));
+			if (typeof window !== "undefined" && window.localStorage) {
+				return Promise.resolve(localStorage.getItem(key));
+			}
+			return Promise.resolve(null);
 		}
 		return SecureStore.getItemAsync(key);
 	},
 	setItem: (key: string, value: string) => {
 		if (Platform.OS === "web") {
-			localStorage.setItem(key, value);
+			if (typeof window !== "undefined" && window.localStorage) {
+				localStorage.setItem(key, value);
+			}
 			return Promise.resolve();
 		}
 		return SecureStore.setItemAsync(key, value);
 	},
 	removeItem: (key: string) => {
 		if (Platform.OS === "web") {
-			localStorage.removeItem(key);
+			if (typeof window !== "undefined" && window.localStorage) {
+				localStorage.removeItem(key);
+			}
 			return Promise.resolve();
 		}
 		return SecureStore.deleteItemAsync(key);

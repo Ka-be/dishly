@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   TextInput,
@@ -15,6 +15,7 @@ import { Recipe } from '@/@types/recipe';
 import mockRecipes from '@/mock/recipes';
 import Header from '@/components/Header';
 import { useResponsive } from '@/hooks/useResponsive';
+import { testSupabaseConnection } from '@/lib/test-supabase';
 
 
 
@@ -37,6 +38,10 @@ export default function HomeScreen() {
 
   // Hook responsive
   const { columns, cardWidth } = useResponsive();
+
+  useEffect(() => {
+    testSupabaseConnection();
+  }, []);
 
   const handleSearch = (text: string) => {
     setSearchQuery(text);
