@@ -6,7 +6,6 @@ import {
   StyleSheet,
   FlatList,
   Dimensions,
-  useColorScheme,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -15,6 +14,7 @@ import { Colors } from '@/constants/Colors';
 import { Recipe } from '@/@types/recipe';
 import mockRecipes from '@/mock/recipes';
 import Header from '@/components/Header';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 const { width } = Dimensions.get('window');
 const cardWidth = (width - 48) / 2; // 2 colonnes avec padding
@@ -46,7 +46,7 @@ export default function HomeScreen() {
       width={cardWidth}
       marginBottom="$3"
       overflow="hidden"
-      backgroundColor="$background"
+      backgroundColor={colors.background}
       hoverStyle={{ scale: 0.98 }}
       pressStyle={{ scale: 0.96 }}
       animation="bouncy"
@@ -121,84 +121,23 @@ export default function HomeScreen() {
     </Card>
   );
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: colors.background,
-    },
-    searchContainer: {
-      flexDirection: 'row',
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      gap: 12,
-    },
-    searchBar: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      backgroundColor: colorScheme === 'dark' ? '#2A2D30' : '#f8f9fa',
-      borderRadius: 12,
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      borderWidth: 1,
-      borderColor: colorScheme === 'dark' ? '#3A3D40' : '#e9ecef',
-    },
-    searchIcon: {
-      marginRight: 8,
-    },
-    searchInput: {
-      flex: 1,
-      fontSize: 16,
-      color: colors.text,
-    },
-    filterButton: {
-      backgroundColor: colorScheme === 'dark' ? '#2A2D30' : '#f8f9fa',
-      borderRadius: 12,
-      padding: 12,
-      borderWidth: 1,
-      borderColor: colorScheme === 'dark' ? '#3A3D40' : '#e9ecef',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    recipesList: {
-      padding: 16,
-    },
-    row: {
-      justifyContent: 'space-between',
-    },
-    cardTitle: {
-      fontSize: 16,
-      fontWeight: '600',
-    },
-    cardDescription: {
-      fontSize: 12,
-      lineHeight: 16,
-    },
-    infoText: {
-      fontSize: 12,
-    },
-    badge: {
-      paddingHorizontal: 8,
-      paddingVertical: 4,
-      borderRadius: 6,
-    },
-    badgeText: {
-      fontSize: 10,
-      fontWeight: '500',
-    },
-  });
-
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
 
       <Header title="Mes recettes" />
 
 
       <View style={styles.searchContainer}>
-        <View style={styles.searchBar}>
+        <View style={[
+          styles.searchBar,
+          {
+            backgroundColor: colorScheme === 'dark' ? '#2A2D30' : '#f8f9fa',
+            borderColor: colorScheme === 'dark' ? '#3A3D40' : '#e9ecef',
+          }
+        ]}>
           <Ionicons name="search" size={20} color={colors.icon} style={styles.searchIcon} />
           <TextInput
-            style={styles.searchInput}
+            style={[styles.searchInput, { color: colors.text }]}
             placeholder="Rechercher une recette..."
             value={searchQuery}
             onChangeText={handleSearch}
@@ -211,7 +150,13 @@ export default function HomeScreen() {
           )}
         </View>
 
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={[
+          styles.filterButton,
+          {
+            backgroundColor: colorScheme === 'dark' ? '#2A2D30' : '#f8f9fa',
+            borderColor: colorScheme === 'dark' ? '#3A3D40' : '#e9ecef',
+          }
+        ]}>
           <Ionicons name="options-outline" size={20} color={colors.text} />
         </TouchableOpacity>
       </View>
@@ -229,3 +174,61 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  searchContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    gap: 12,
+  },
+  searchBar: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderWidth: 1,
+  },
+  searchIcon: {
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+  },
+  filterButton: {
+    borderRadius: 12,
+    padding: 12,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  recipesList: {
+    padding: 16,
+  },
+  row: {
+    justifyContent: 'space-between',
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  cardDescription: {
+    fontSize: 12,
+    lineHeight: 16,
+  },
+  infoText: {
+    fontSize: 12,
+  },
+  badge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+  },
+  badgeText: {
+    fontSize: 10,
+    fontWeight: '500',
+  },
+});

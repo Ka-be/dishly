@@ -11,6 +11,7 @@ export const Colors = {
     text: '#11181C',
     background: '#fff',
     tint: tintColorLight,
+    tintContrast: '#0A0B0C', // Text color on tint background (dark for contrast with light cyan)
     secondary: '#FB923C',
     icon: '#687076',
     badge: '#c0c9cf',
@@ -21,6 +22,7 @@ export const Colors = {
     text: '#ECEDEE',
     background: '#151718',
     tint: tintColorDark,
+    tintContrast: '#0A0B0C', // Text color on tint background (dark for contrast with light cyan)
     secondary: '#FB923C',
     icon: '#9BA1A6',
     badge: '#2A2D30',
