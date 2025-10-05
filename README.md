@@ -15,7 +15,7 @@ A mobile and web application that allows you to create, save, and follow your co
 
 - [x] Recipe browsing with responsive design
 - [x] Recipe search and filtering
-- [ ] User authentication (Google OAuth)
+- [X] User authentication (Google OAuth)
 - [ ] Create recipes with ingredients and steps
 - [ ] Step-by-step cooking mode with swipeable interface
 - [ ] Integrated timers that run in background
